@@ -1,0 +1,11 @@
+fastapi~=0.68.1
+ uvicorn
+pydantic~=1.8.2
+pip~=21.1.2
+wheel~=0.36.2
+setuptools~=57.0.0
+SQLAlchemy~=1.4.25
+passlib~=1.7.4
+bcrypt
+python-jose
+python-multipart
