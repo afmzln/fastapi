@@ -1,5 +1,6 @@
 from pydantic import BaseModel
-from typing import Optional  # List
+from typing import Optional
+import datetime
 
 
 class Blog(BaseModel):
@@ -25,6 +26,7 @@ class User(BaseModel):
 
 
 class ShowUser(BaseModel):
+    id: int
     name: str
     email: str
 
@@ -44,3 +46,24 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     email: Optional[str] = None
+
+
+class TweetBase(BaseModel):
+    title: str
+    description: str
+
+    class Config:
+        orm_mode = True
+
+
+class ShowTweet(BaseModel):
+    id: int
+    created: Optional[datetime.datetime]
+    title: str
+    description: str
+    user_id: int
+
+    user: ShowUser
+
+    class Config:
+        orm_mode = True

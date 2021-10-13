@@ -2,8 +2,7 @@
 from fastapi import FastAPI
 from . import models
 from .database import engine
-from .router import blog, user, login
-
+from .router import blog, user, login, tweet
 app = FastAPI()
 
 models.Base.metadata.create_all(engine)
@@ -11,7 +10,7 @@ models.Base.metadata.create_all(engine)
 app.include_router(blog.router)
 app.include_router(login.router)
 app.include_router(user.router)
-
+app.include_router(tweet.router)
 
 #
 # def get_db():

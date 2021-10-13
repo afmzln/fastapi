@@ -1,8 +1,7 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from .database import Base
-
-
-
+import datetime
+from sqlalchemy.orm import relationship
 
 
 class Blog(Base):
@@ -20,7 +19,14 @@ class User(Base):
     email = Column(String)
     password = Column(String)
 
+    tweet = relationship("Tweet", back_populates="user")
 
+class Tweet(Base):
+    __tablename__ = "tweet"
+    id = Column(Integer, primary_key=True, index=True)
+    created = Column(DateTime, default=datetime.datetime.utcnow)
+    title = Column(String)
+    description = Column(String)
+    user_id = Column(Integer, ForeignKey("users.id"))
 
-
-
+    user = relationship("User", back_populates="tweet")

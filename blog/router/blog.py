@@ -20,23 +20,25 @@ def all(db: Session = Depends(get_db), current_user: schemas.User = Depends(oaut
 
 # CREATE BLOG
 @router.post("/", status_code=status.HTTP_201_CREATED)
-def create(request: schemas.Blog, db: Session = Depends(get_db),current_user: schemas.User = Depends(oauth2.get_current_user)):
+def create(request: schemas.Blog, db: Session = Depends(get_db),
+           current_user: schemas.User = Depends(oauth2.get_current_user)):
     return blog.create(request, db)
 
 
 # GET BLOG DATA BASED ON ID
 @router.get("/{id}", status_code=200, response_model=schemas.ShowBlog)
-def show(id: int, db: Session = Depends(get_db),current_user: schemas.User = Depends(oauth2.get_current_user)):
+def show(id: int, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
     return blog.show(id, db)
 
 
 # DELETE BLOG
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete(id: int, db: Session = Depends(get_db),current_user: schemas.User = Depends(oauth2.get_current_user)):
+def delete(id: int, db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
     return blog.delete(id, db)
 
 
 # UPDATE BLOG
 @router.put("/{id}", status_code=status.HTTP_202_ACCEPTED)
-def updated(id: int, request: schemas.Blog, db: Session = Depends(get_db),current_user: schemas.User = Depends(oauth2.get_current_user)):
+def updated(id: int, request: schemas.Blog, db: Session = Depends(get_db),
+            current_user: schemas.User = Depends(oauth2.get_current_user)):
     return blog.update(id, request, db)
